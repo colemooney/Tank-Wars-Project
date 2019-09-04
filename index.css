@@ -1,0 +1,12 @@
+canvas {
+    border: 1px red solid;
+    
+
+}
+div{
+    display: flex;
+    justify-content: center;
+}
+html{
+    background: black;
+}
