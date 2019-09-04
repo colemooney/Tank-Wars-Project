@@ -1,205 +1,200 @@
-function drawLogo(){
-var canvas = document.getElementById("logo")
+
+var canvas = document.getElementById("game")
 var ctx = canvas.getContext('2d');
 
-ctx.fillStyle = "purple"
-ctx.ellipse(150, 300, 100, 150, Math.PI / 2, 0, 2 * Math.PI)
-ctx.fill()
-ctx.fillStyle = "white"
-ctx.font = "50px Arial"
-ctx.fillText("Cole Wars", 35, 315);
 
-ctx.fillStyle = "black"
-ctx.font = "20px Arial"
-ctx.fillText("Press Me", 100, 350);
-}
-drawLogo()
-
-function drawBack(){
-    var canvas = document.getElementById("game")
-var ctx = canvas.getContext('2d');
+function drawBg(){
     ctx.fillStyle = "green"
     ctx.fillRect(0, 0, 600, 600)
     ctx.fill()
     ctx.fillStyle = "grey"
-    ctx.fillRect(0, 500 , 600, 100)
+    ctx.fillRect(0, 500, 600, 100)
     ctx.fill()
 }
 
-  function getRandomInt(max) {
-         return Math.floor(Math.random() * Math.floor(max));
-      
-      }
-  function drawEnemy(enemy){
 
-  
-      
-    var canvas = document.getElementById('game');
-     var ctx = canvas.getContext('2d');
-  
-     enemy = new Image();
-     
-    //  let getRandomInt(500) = point
 
-    
-    var zzzz= Math.floor(Math.random() * Math.floor(50))
-    setInterval(enemy.onload = function() {
-        var xE = zzzz;
-    
-    
-        var yE = 50;
-        updateCanvas()
-        let xR = setInterval(xE , 5000)
-        let yF = setInterval(yE + Math.floor(Math.random() * Math.floor(50)), 100);
-        
-        // debugger
-        zzzz+=Math.floor(Math.random() * Math.floor(50))
-        ctx.clearRect(enemy, xE, yE, 50, 50);
-        ctx.drawImage(enemy, xR , yF , 50, 50);
-        // ctx.drawImage(enemy, xE , yF , 50, 50);
-        
-       
-        // drawEnemy()
-        //  ctx.clearRect(enemy, xE, yE, 50, 50)
-      }, 50)
-    
-    enemy.src = './images/enemy.png';
-  }
-//   var moveEnemy = {
-//     let xM;
-//     let yM;
-    
-//   }
+/**TANKS STUFF* */
+var img = new Image();
+img.onload = function () {
+    ctx.drawImage(img, tank.x, tank.y, 100, 100);
+
+};
+img.src = './images/tank.png';
 var tank = {
     x: 300,
     y: 500,
-     moveLeft:  function() { this.x -= 25 },
-     moveRight: function() { this.x += 25 },
-  }
-  function drawTank(tank){
-  
-  
-    var canvas = document.getElementById('game');
-     var ctx = canvas.getContext('2d');
-  
-    var img = new Image();
-    // imgScale = 1/2;
-  
-    img.onload = function() {
-          ctx.drawImage(img, tank.x, tank.y,100,100);
-      
-      };
-  
-    img.src = './images/tank.png';
-  }
-  setInterval(function shot(){
-    var canvas = document.getElementById('game');
-    var ctx = canvas.getContext('2d');
-      let xS;
-      var yS = tank.y;
-      let yS = setInterval(490 - Math.floor(Math.random() * Math.floor(50)), 100);
-      function shooting(){
-        // let yS = yS - 10;
-        updateCanvas()
-        
-        
-        
-        ctx.clearRect(xS, yS, 5, 20)
-        ctx.fillStyle= "yellow"
-        ctx.fillRect(xS, yS, 5, 20)
-        ctx.fill()
-        
-      }
-      console.log(shooting())
-  }, 100)
-//   function enemies(){
-//     var canvas = document.getElementById('game');
-//     var ctx = canvas.getContext('2d');
-//     var xE = getRandomInt(600)
-//     var yE = getRandomInt(400)
-//     var enemy = new Image();
-//     enemy.onload = function(){
-//         ctx.drawEnemies(img, xE, yE, 100, 100)
-//     }
-//     enemy.src = "./images/enemy.png"
-//   }
-//   function shoot(){
-//     // for(let i = 49; i > 1 ; i * 10){
-//     let x =+ tank.x
-//     let y = 490 
-    
-//     var canvas = document.getElementById('game');
-//      var ctx = canvas.getContext('2d');
-     
-//     ctx.fillStyle = "black"
-//     ctx.fillRect(x, y , 5, 10)
-//     ctx.fillStyle = "yellow"
-//     ctx.fillRect(x, y, 5, 10)
-    
-//     if (y > 0){
-//         timer = setTimeout("shoot()", 1);
-//         updateCanvas(tank)
-        
-//     } else{
-//         ctx.fillStyle = "black";
-//         ctx.fillRect(x, y, 5, 10);
-//         y = 490;
-//         ctx.fillRect(x + 23, y, 5, 10)
-//         updateCanvas(tank)
-//     }
-    
-//      }
+    moveLeft: function () {
+        this.x -= 25
+    },
+    moveRight: function () {
+        this.x += 25
+    },
+}
+/**** */
 
 
 
 
-    document.onkeydown = function(e) {
-        var canvas = document.getElementById('game');
-     var ctx = canvas.getContext('2d');
-      
-      switch (e.keyCode) {
-        case 37: tank.moveLeft();
-          console.log('left',  tank); 
-            break;
-        case 39: tank.moveRight(); 
-        console.log('right', tank); 
-            break;
-        case 38: shot(); 
-        console.log('shoot'); 
-            break;
-      }
-      
-      
+/**ENEMY STUFF */
+let enemyImage = new Image();
+enemyImage.src = './images/enemy.png';
+
+class Enemy {
+    constructor(x,y){
+        this.y = y
+        this.x = x
     }
-  
+    moveDown(){
+        this.y = this.y+1;
+        this.x = this.x+.2; 
+        ctx.drawImage(enemyImage, this.x, this.y, 50, 50);    
+    }
+    draw(){
+    }
+    
+} 
 
-  
-  
-  function updateCanvas() {
-    var canvas = document.getElementById('game');
-     var ctx = canvas.getContext('2d');
-    ctx.clearRect(0,0,1500,1700);
-    drawTank(tank)
-    
-    drawBack() 
-    
-   } 
-   function updateEnemy() {
-    console.log("woor")
-    var canvas = document.getElementById('game');
-     var ctx = canvas.getContext('2d');
-     
-     updateCanvas()
+let enemies = [] 
+for (let k = 1; k< 5; k++){
+    if (k>0){
+function spawn(){
+    let invader = new Enemy(Math.random()*canvas.width, 0)
+    enemies.push(invader)
+}
+    }else;
+}
+/*** ENEMY */
 
-    drawEnemy()
-    
-  }
-  
 
-document.getElementById("logo").onclick = function startGame(){
-    console.log("starting game");
-    document.getElementById('game');
+
+/***BULLETS */
+class Bullet {
+    constructor(x,y){
+        this.x = x
+        this.y = y
+        
+    }
+    moveUp(){
+        this.y -= 2
+        ctx.fillStyle ="yellow"
+        ctx.fillRect(this.x, this.y, 5, 10)
+    }
     
-    updateEnemy()
-    // setInterval(startGame()), 10)
-}   
+}
+
+let shots = []
+function shoot(){
+    let shot = new Bullet(tank.x + 50, tank.y)
+    shots.push(shot)
+}
+/***** */
+
+
+
+//**HEARBEAT --ENGINE */
+function animate(){
+    ctx.clearRect(0,0,canvas.width, canvas.height); //clears all
+    drawBg()
+    ctx.drawImage(img, tank.x, tank.y, 100, 100);
+    
+    shots.forEach(shot=>{
+        shot.moveUp()
+    })
+     enemies.forEach(enemy=>{
+        invader.moveDown()
+     })
+    window.requestAnimationFrame(animate)
+}animate()
+
+
+
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+
+}
+
+
+
+
+
+document.onkeydown = function (e) {
+
+    switch (e.keyCode) {
+        case 37:
+            tank.moveLeft();
+            console.log('left', tank);
+            break;
+        case 39:
+            tank.moveRight();
+            console.log('right', tank);
+            break;
+        case 38:
+            shoot();
+            console.log('shoot');
+            break;
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function drawLogo() {
+    var canvas = document.getElementById("logo")
+    var ctx = canvas.getContext('2d');
+
+    ctx.fillStyle = "purple"
+    ctx.ellipse(150, 300, 100, 150, Math.PI / 2, 0, 2 * Math.PI)
+    ctx.fill()
+    ctx.fillStyle = "white"
+    ctx.font = "50px Arial"
+    ctx.fillText("Cole Wars", 35, 315);
+
+    ctx.fillStyle = "black"
+    ctx.font = "20px Arial"
+    ctx.fillText("Press Me", 100, 350);
+}
+drawLogo()
