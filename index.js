@@ -16,10 +16,10 @@ function drawBg(){
 
 /**TANKS STUFF* */
 var img = new Image();
-img.onload = function () {
-    ctx.drawImage(img, tank.x, tank.y, 100, 100);
+// img.onload = function () {
+//     ctx.drawImage(img, tank.x, tank.y, 100, 100);
 
-};
+// };
 img.src = './images/tank.png';
 var tank = {
     x: 300,
@@ -47,23 +47,18 @@ class Enemy {
     }
     moveDown(){
         this.y = this.y+1;
-        this.x = this.x+.2; 
+        this.x += ((Math.random() - 0.5) * 2); 
         ctx.drawImage(enemyImage, this.x, this.y, 50, 50);    
-    }
-    draw(){
-    }
+    }   
     
 } 
 
 let enemies = [] 
-for (let k = 1; k< 5; k++){
-    if (k>0){
 function spawn(){
     let invader = new Enemy(Math.random()*canvas.width, 0)
     enemies.push(invader)
 }
-    }else;
-}
+
 /*** ENEMY */
 
 
@@ -90,23 +85,96 @@ function shoot(){
 }
 /***** */
 
+/**BOUND BOX */
+
+function bound(){
+    for (let g = 0; g < enemies.length; g++){
+    if (enemies[g].x > 530 ){
+        enemies.splice(g, 1)
+        console.log(enemies[g])
+        continue;
+    }
+    }
+}
+let gO = 0;
+function endGame(){
+    for (let g = 0; g < enemies.length; g++){
+        if(enemies[g].y > 450){
+            enemies.splice(g, 1)
+            gO++
+        } else;
+       
+    if(gO > 2){
+        console.log("OVER")
+        ctx.fillStyle="grey"
+        ctx.fillRect(200, 200, 200, 200)
+        ctx.fillStyle="white"
+        ctx.font="20px Arial"
+        ctx.fillText("GAME OVER", 240, 300)
+        
+    } else if (gO > 1){
+        
+        ctx.font="15px Arial"
+        ctx.fillStyle="red"
+        ctx.fillText("1 life",10,20)
+
+    } else if (gO > 0){
+        ctx.font="15px Arial"
+        ctx.fillStyle="red"
+        ctx.fillText("2 lives",10,20)
+
+    }
+ }
+}
+/** */
+
+/*** collision */
+
+function collision(){
+    for (let i = 0; i < enemies.length; i++){
+        for (let h = 0; h < shots.length; h++){
+            if(!shots[h]  ||  !enemies[i]){
+                break;
+            }
+            if (shots[h].x < enemies[i].x + 50 && shots[h].x > enemies[i].x  && shots[h].y > enemies[i].y && shots[h].y < enemies[i].y + 50){
+                console.log(" >>>>>>>>>>>>>   hit   <<<<<<<<<<<<< ")
+                enemies.splice(i, 1)
+                shots.splice (h,1)
+            }
+        }
+    }
+}
+
+
+/*** */
 
 
 //**HEARBEAT --ENGINE */
+let fmp = 0
 function animate(){
     ctx.clearRect(0,0,canvas.width, canvas.height); //clears all
     drawBg()
     ctx.drawImage(img, tank.x, tank.y, 100, 100);
     
+    enemies.forEach(invader=>{
+        invader.moveDown()
+    })
+    
     shots.forEach(shot=>{
         shot.moveUp()
+        
     })
-     enemies.forEach(enemy=>{
-        invader.moveDown()
-     })
-    window.requestAnimationFrame(animate)
-}animate()
+    bound()
+    collision()
 
+    fmp++
+    
+    if( fmp % 150 === 0){
+        spawn()
+    } 
+    endGame()
+    window.requestAnimationFrame(animate)
+}
 
 
 
@@ -133,6 +201,7 @@ document.onkeydown = function (e) {
         case 38:
             shoot();
             console.log('shoot');
+            
             break;
     }
 
@@ -191,10 +260,13 @@ function drawLogo() {
     ctx.fill()
     ctx.fillStyle = "white"
     ctx.font = "50px Arial"
-    ctx.fillText("Cole Wars", 35, 315);
+    ctx.fillText("Tank Wars", 35, 315);
 
     ctx.fillStyle = "black"
     ctx.font = "20px Arial"
-    ctx.fillText("Press Me", 100, 350);
+    ctx.fillText("Start/Difficulty Up", 70, 350);
 }
 drawLogo()
+document.getElementById("logo").onclick = function(){
+    animate()
+}

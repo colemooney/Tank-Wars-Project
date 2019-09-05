@@ -1,12 +1,14 @@
-canvas {
-    border: 1px red solid;
-    
-
-}
 div{
-    display: flex;
-    justify-content: center;
+    
 }
 html{
     background: black;
+}
+#logo{
+    float: left;
+}
+#game{
+    display: flex;
+    align-items: center;
+    float: center;
 }
