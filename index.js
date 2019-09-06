@@ -5,8 +5,6 @@ var ctx = canvas.getContext('2d');
 var im = new Image()
 im.src = './images/TW_logo_final.png'
 
-//console.log(c, ctx, img)
-//ctx.drawImage(img, 20, 20);
 im.onload = function(){
     console.log(ctx)
     ctx.drawImage(im, 0, 150, canvas.width, 300)
@@ -40,8 +38,6 @@ var tank = {
 
 /**ENEMY STUFF */
 let enemyImage = new Image();
-//enemyImage.src = './images/enemy.png';
-
 class Enemy {
     constructor(x, y, src, speed) {
         this.y = y
@@ -57,27 +53,11 @@ class Enemy {
     }
 
 }
-//let newEnemy = new Image()
-//newEnemy.src = "./images/newenemy.png"
-// class EnemyTwo extends Enemy{
-//     constructor(x, y){
-//         super(x, y)
-//     }
-//     moveDown() {
-//         console.log(this)
-//         this.y = this.y + 1;
-//         this.x += ((Math.random() - 0.5) * 2);
-//         ctx.drawImage(enemyImage, this.x, this.y, 50, 50);
-//     }
-
-// }
 let enemies = []
 
 function spawn(src, speed) {
     let invader = new Enemy(Math.random() * canvas.width, 0,  src, speed)
     enemies.push(invader)
-    //let invadertwo = new EnemyTwo(Math.random() * canvas.width, 0, src)
-    //enemies.push(invadertwo)
 }
 /*** ENEMY */
 
@@ -170,7 +150,6 @@ function collision() {
 let score = 0;
 function counter(){
     score++
-    //console.log(score);
     ctx.font="15px Arial"
     ctx.fillStyle="red"
     ctx.fillText(`score: ${Math.round(score/100)}`, 100, 20)
@@ -190,10 +169,6 @@ function animate() {
         invader.moveDown()
         
     })
-    // enemies.forEach(invadertwo => {
-    //     invadertwo.moveDown()
-        
-    // })
 
     shots.forEach(shot => {
         shot.moveUp()
