@@ -1,6 +1,3 @@
-div{
-    
-}
 html{
     background: black;
 }
@@ -11,4 +8,23 @@ html{
     display: flex;
     align-items: center;
     float: center;
+    /* position:relative;
+    z-index:20;
+    border: 1px red solid; */
 }
+body{
+    text-align: center;
+}
+.img{
+    position:absolute;
+    z-index:1;
+    
+}
+/* #container{
+    display:inline-block;
+    width:auto; 
+    height:auto;
+    margin: 0 auto; 
+    background: black; 
+    position:relative; 
+} */

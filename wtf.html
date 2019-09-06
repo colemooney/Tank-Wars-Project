@@ -1,0 +1,28 @@
+<html>
+<style>
+    canvas{
+        border: 1px solid red;
+    }
+</style>
+
+<canvas id="game"></canvas>
+    
+
+
+
+<script>
+        var c = document.getElementById("game");
+        var ctx = c.getContext("2d");
+        
+        var img = new Image()
+        img.src = 'https://www.w3schools.com/tags/img_the_scream.jpg'
+
+        //console.log(c, ctx, img)
+        //ctx.drawImage(img, 20, 20);
+        img.onload = function(){
+            ctx.drawImage(img, 19, 3)
+        }
+
+
+</script>
+</html>
