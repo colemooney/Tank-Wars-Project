@@ -89,7 +89,6 @@ function bound() {
     for (let g = 0; g < enemies.length; g++) {
         if (enemies[g].x > 530) {
             enemies.splice(g, 1)
-            ////console.log(enemies[g])
             continue;
         }
     }
@@ -112,7 +111,7 @@ function endGame() {
             ctx.fillStyle = "white"
             ctx.font = "20px Arial"
             ctx.fillText("GAME OVER", 240, 300)
-            ctx.fillText("Your score is " + Math.round(score/100), 240, 340)
+            ctx.fillText("Your score is " + Math.round(score/100), 230, 340)
             throw "Game over!"
 
         } else if (gO > 1) {
