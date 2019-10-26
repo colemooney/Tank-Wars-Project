@@ -79,7 +79,7 @@ class Bullet {
 let shots = []
 
 function shoot() {
-    let shot = new Bullet(tank.x + 50, tank.y)
+    let shot = new Bullet(tank.x + 47, tank.y - 5)
     shots.push(shot)
 }
 /***** */
@@ -110,8 +110,8 @@ function endGame() {
             ctx.fillRect(200, 200, 200, 200)
             ctx.fillStyle = "white"
             ctx.font = "20px Arial"
-            ctx.fillText("GAME OVER", 240, 300)
-            ctx.fillText("Your score is " + Math.round(score/100), 230, 340)
+            ctx.fillText("GAME OVER", 240, 290)
+            ctx.fillText("Score: " + Math.round(score/100), 260, 330)
             throw "Game over!"
 
         } else if (gO > 1) {
